@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import Header from '../components/Header'
+import Header, { Footer } from '../components/Header'
 import ProductGrid from '../components/ProductGrid'
 import AIChatBot from '../components/AIChatBot'
 import CategoryFilter from '../components/CategoryFilter'
@@ -31,12 +31,15 @@ export default function Home() {
       <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="text-center mb-12">
-          <h1 className="text-6xl font-bold neon-text mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold neon-text mb-4">
             ANON<span className="text-accent">BUY</span>
           </h1>
-          <p className="text-xl text-gray-300 mb-8">
+          <p className="text-lg md:text-xl text-gray-300 mb-8">
             Next Generation Tech Marketplace • AI-Powered Shopping
           </p>
+          <div className="bg-accent text-black inline-block px-4 py-2 rounded-lg">
+            <p className="font-semibold">Created by Brian for Computer Science Assignment</p>
+          </div>
         </div>
 
         <CategoryFilter 
@@ -47,6 +50,7 @@ export default function Home() {
         <ProductGrid products={filteredProducts} />
       </main>
       
+      <Footer />
       <AIChatBot />
     </div>
   )

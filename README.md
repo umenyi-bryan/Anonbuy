@@ -1,5 +1,7 @@
 # ANONBUY - Next Generation Tech Marketplace
 
+> **Created by Brian for Computer Science Assignment**
+
 A sleek, modern e-commerce platform for tech products with AI-powered shopping assistance.
 
 ## Features
@@ -11,6 +13,10 @@ A sleek, modern e-commerce platform for tech products with AI-powered shopping a
 - 📱 Responsive Design
 - ⚡ Built with Next.js 14
 - 🎨 Tailwind CSS Styling
+
+## Live Demo
+
+Deployed on Vercel: [https://anonbuy.vercel.app](https://anonbuy.vercel.app)
 
 ## Tech Stack
 
@@ -34,14 +40,6 @@ npm run dev
 
 1. Open http://localhost:3000 in your browser.
 
-Deployment
-
-This project is configured for easy deployment on Vercel:
-
-1. Push to GitHub
-2. Connect your GitHub repo to Vercel
-3. Deploy automatically
-
 Project Structure
 
 ```
@@ -59,6 +57,8 @@ anonbuy/
 └── package.json
 ```
 
-Contributing
+Creator
 
-Feel free to contribute to this project by submitting issues or pull requests.
+Brian - Computer Science Assignment Project
+
+This project demonstrates modern web development with React, Next.js, and AI integration.

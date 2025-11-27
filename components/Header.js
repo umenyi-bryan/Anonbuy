@@ -61,3 +61,17 @@ export default function Header() {
     </header>
   )
 }
+
+// Add this footer component at the bottom of the file
+export function Footer() {
+  return (
+    <footer className="bg-black border-t border-gray-800 mt-12">
+      <div className="container mx-auto px-4 py-6">
+        <div className="text-center text-gray-400">
+          <p>Created by Brian for Computer Science Assignment</p>
+          <p className="text-sm mt-2">ANONBUY - Next Generation Tech Marketplace</p>
+        </div>
+      </div>
+    </footer>
+  )
+}
