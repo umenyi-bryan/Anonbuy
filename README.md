@@ -1,64 +1,73 @@
-# ANONBUY - Next Generation Tech Marketplace
+# ANONBUY - Simple Tech Shop
 
 > **Created by Brian for Computer Science Assignment**
 
-A sleek, modern e-commerce platform for tech products with AI-powered shopping assistance.
+A clean, simple tech e-commerce website built with HTML, CSS, and JavaScript.
 
-## Features
-
-- 🛍️ 5000+ Tech Products
-- 🤖 AI Shopping Assistant
-- 🎮 Multiple Categories (Gaming, Cybersecurity, Smartphones, etc.)
-- 💰 Real Pricing
-- 📱 Responsive Design
-- ⚡ Built with Next.js 14
-- 🎨 Tailwind CSS Styling
-
-## Live Demo
-
+## 🚀 Live Demo
 Deployed on Vercel: [https://anonbuy.vercel.app](https://anonbuy.vercel.app)
 
-## Tech Stack
+## ✨ Features
+- Product catalog with tech items
+- Category filtering
+- AI chat assistant
+- Responsive design
+- Shopping cart functionality
+- Clean and modern UI
 
-- **Framework**: Next.js 14
-- **Styling**: Tailwind CSS
-- **Icons**: Lucide React
+## 🛠️ Tech Stack
+- **Frontend**: HTML5, CSS3, JavaScript
+- **Backend**: Node.js + Express
 - **Deployment**: Vercel
+- **Styling**: Custom CSS
 
-## Getting Started
-
-1. Install dependencies:
-```bash
-npm install
+## 📁 Project Structure
 ```
 
-1. Run the development server:
-
-```bash
-npm run dev
-```
-
-1. Open http://localhost:3000 in your browser.
-
-Project Structure
-
-```
 anonbuy/
-├── app/
-│   ├── globals.css
-│   ├── layout.js
-│   └── page.js
-├── components/
-│   ├── AIChatBot.js
-│   ├── CategoryFilter.js
-│   ├── Header.js
-│   └── ProductGrid.js
-├── public/
-└── package.json
+├──index.html          # Main website
+├──server.js           # Express server
+├──package.json        # Dependencies
+├──vercel.json         # Vercel configuration
+└──README.md          # Documentation
+
 ```
 
-Creator
+## 🏃‍♂️ Run Locally
+```bash
+# Install dependencies
+npm install
 
-Brian - Computer Science Assignment Project
+# Start development server
+npm run dev
 
-This project demonstrates modern web development with React, Next.js, and AI integration.
+# Open http://localhost:3000
+```
+
+🌐 Deployment
+
+This project is configured for automatic deployment on Vercel when pushed to GitHub.
+
+👨‍💻 Creator
+
+Brian - Computer Science Assignment
+
+This project demonstrates fundamental web development skills including:
+
+· DOM manipulation
+· Event handling
+· Responsive design
+· Server setup
+· Deployment workflows
+  EOF
+
+```
+
+## Step 6: Create .gitignore
+```bash
+cat > .gitignore << 'EOF'
+node_modules/
+.env
+.DS_Store
+*.log
+.vercel

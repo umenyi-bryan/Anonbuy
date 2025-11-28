@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANONBUY - Tech Shop</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #000; color: white; }
+        .header { background: #111; padding: 1rem; border-bottom: 2px solid #00ff88; }
+        .nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .logo { color: #00ff88; font-size: 1.5rem; font-weight: bold; }
+        .search-bar { flex: 1; max-width: 500px; margin: 0 2rem; }
+        .search-bar input { width: 100%; padding: 0.5rem; background: #222; border: 1px solid #333; color: white; border-radius: 4px; }
+        .hero { text-align: center; padding: 3rem 1rem; background: #111; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; color: #00ff88; }
+        .creator { background: #00ff88; color: black; padding: 0.5rem 1rem; border-radius: 4px; display: inline-block; margin: 1rem 0; font-weight: bold; }
+        .categories { display: flex; gap: 1rem; padding: 1rem; overflow-x: auto; max-width: 1200px; margin: 0 auto; }
+        .category-btn { padding: 0.5rem 1rem; background: #222; border: none; color: white; border-radius: 20px; cursor: pointer; }
+        .category-btn.active { background: #00ff88; color: black; }
+        .products { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; padding: 2rem; max-width: 1200px; margin: 0 auto; }
+        .product-card { background: #111; border: 1px solid #333; border-radius: 8px; padding: 1rem; }
+        .product-card:hover { border-color: #00ff88; }
+        .product-image { width: 100%; height: 150px; background: #222; border-radius: 4px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; color: #666; font-size: 2rem; }
+        .product-price { color: #00ff88; font-size: 1.2rem; font-weight: bold; margin: 0.5rem 0; }
+        .add-to-cart { width: 100%; padding: 0.5rem; background: #00ff88; color: black; border: none; border-radius: 4px; cursor: pointer; }
+        .chat-btn { position: fixed; bottom: 2rem; right: 2rem; background: #00ff88; color: black; border: none; border-radius: 50%; width: 60px; height: 60px; cursor: pointer; font-size: 1.5rem; }
+        .chat-window { position: fixed; bottom: 5rem; right: 2rem; width: 300px; height: 400px; background: #111; border: 1px solid #333; border-radius: 8px; display: none; flex-direction: column; }
+        .chat-header { background: #00ff88; color: black; padding: 1rem; border-radius: 8px 8px 0 0; font-weight: bold; }
+        .chat-messages { flex: 1; padding: 1rem; overflow-y: auto; }
+        .message { margin: 0.5rem 0; padding: 0.5rem; border-radius: 4px; max-width: 80%; }
+        .bot-message { background: #222; }
+        .user-message { background: #00ff88; color: black; margin-left: auto; }
+        .chat-input { display: flex; padding: 1rem; border-top: 1px solid #333; }
+        .chat-input input { flex: 1; padding: 0.5rem; background: #222; border: 1px solid #333; color: white; border-radius: 4px; }
+        .send-btn { background: #00ff88; color: black; border: none; padding: 0.5rem 1rem; margin-left: 0.5rem; border-radius: 4px; cursor: pointer; }
+        .footer { text-align: center; padding: 2rem; background: #111; margin-top: 2rem; border-top: 1px solid #333; }
+        
+        @media (max-width: 768px) {
+            .nav { flex-direction: column; gap: 1rem; }
+            .search-bar { margin: 0; width: 100%; }
+            .products { grid-template-columns: 1fr; padding: 1rem; }
+            .chat-window { width: 90%; right: 5%; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav">
+            <div class="logo">ANONBUY</div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search tech products..." id="searchInput">
+            </div>
+            <div class="nav-icons">
+                <button style="background: none; border: none; color: white; margin-left: 1rem; font-size: 1.2rem;">🛒</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>ANONBUY TECH SHOP</h1>
+        <p>Your one-stop for all tech products</p>
+        <div class="creator">Created by Brian for Computer Science Assignment</div>
+    </section>
+
+    <div class="categories">
+        <button class="category-btn active" onclick="filterProducts('all')">All Products</button>
+        <button class="category-btn" onclick="filterProducts('gaming')">🎮 Gaming</button>
+        <button class="category-btn" onclick="filterProducts('laptops')">💻 Laptops</button>
+        <button class="category-btn" onclick="filterProducts('phones')">📱 Phones</button>
+        <button class="category-btn" onclick="filterProducts('audio')">🎧 Audio</button>
+    </div>
+
+    <div class="products" id="products-container">
+        <!-- Products loaded by JavaScript -->
+    </div>
+
+    <button class="chat-btn" onclick="toggleChat()">💬</button>
+    
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">AI Assistant</div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">Hi! I can help you find tech products. Ask me about gaming, laptops, or phones!</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Ask about products..." onkeypress="handleChatKeypress(event)">
+            <button class="send-btn" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>ANONBUY - Simple Tech Marketplace</p>
+        <p>Created by Brian for Computer Science Assignment</p>
+    </footer>
+
+    <script>
+        const products = [
+            { id: 1, name: "Gaming Laptop", price: 1299, category: "laptops", image: "💻" },
+            { id: 2, name: "Wireless Headphones", price: 199, category: "audio", image: "🎧" },
+            { id: 3, name: "Smartphone", price: 799, category: "phones", image: "📱" },
+            { id: 4, name: "Gaming Mouse", price: 59, category: "gaming", image: "🖱️" },
+            { id: 5, name: "Mechanical Keyboard", price: 129, category: "gaming", image: "⌨️" },
+            { id: 6, name: "Tablet", price: 499, category: "phones", image: "📱" },
+            { id: 7, name: "Bluetooth Speaker", price: 89, category: "audio", image: "🔊" },
+            { id: 8, name: "Gaming Chair", price: 299, category: "gaming", image: "💺" }
+        ];
+
+        function loadProducts(category = 'all') {
+            const container = document.getElementById('products-container');
+            const filteredProducts = category === 'all' ? products : products.filter(p => p.category === category);
+            
+            container.innerHTML = filteredProducts.map(product => `
+                <div class="product-card">
+                    <div class="product-image">${product.image}</div>
+                    <h3>${product.name}</h3>
+                    <div class="product-price">$${product.price}</div>
+                    <button class="add-to-cart" onclick="addToCart(${product.id})">Add to Cart</button>
+                </div>
+            `).join('');
+        }
+
+        function filterProducts(category) {
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            loadProducts(category);
+        }
+
+        function addToCart(productId) {
+            alert('Product added to cart!');
+        }
+
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const messages = document.getElementById('chatMessages');
+            const message = input.value.trim();
+            
+            if (message) {
+                messages.innerHTML += `<div class="message user-message">${message}</div>`;
+                input.value = '';
+                
+                setTimeout(() => {
+                    let response = "I can help you with product info!";
+                    if (message.toLowerCase().includes('gaming')) {
+                        response = "We have gaming laptops from $999, gaming mice from $59, and gaming chairs from $299!";
+                    } else if (message.toLowerCase().includes('laptop')) {
+                        response = "Laptops start at $799. Gaming laptops available from $1299.";
+                    } else if (message.toLowerCase().includes('phone')) {
+                        response = "Smartphones available from $399 to $1299. Tablets from $499.";
+                    } else if (message.toLowerCase().includes('audio')) {
+                        response = "Audio products: Headphones from $199, Speakers from $89.";
+                    } else if (message.toLowerCase().includes('price') || message.toLowerCase().includes('cheap')) {
+                        response = "Our most affordable products start at $59! Check the gaming accessories.";
+                    }
+                    
+                    messages.innerHTML += `<div class="message bot-message">${response}</div>`;
+                    messages.scrollTop = messages.scrollHeight;
+                }, 1000);
+                
+                messages.scrollTop = messages.scrollHeight;
+            }
+        }
+
+        function handleChatKeypress(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => loadProducts());
+    </script>
+</body>
+</html>
